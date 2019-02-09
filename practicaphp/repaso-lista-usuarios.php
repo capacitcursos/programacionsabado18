@@ -1,7 +1,6 @@
-<?php 
+<?php
 session_start();
-//variable de session creada en el archivo sesiones.php
-echo $_SESSION['nombre'];
+echo $_SESSION['nombre']; 
 
 echo "<br> <a href='salir.php'>salir</a>";
 
@@ -47,8 +46,7 @@ echo "<br> <a href='salir.php'>salir</a>";
 				</thead>
 
 				<tbody>
-					<?php foreach ($result as $row) { ?>			
-						 <tr> 
+						<?php foreach ($result as $row) { ?> 			<tr> 
 							<td><?php echo $row['id']; ?></td>
 							<td><?php echo $row['nombre']; ?></td>
 							<td><?php echo $row['email']; ?></td>
@@ -58,7 +56,8 @@ echo "<br> <a href='salir.php'>salir</a>";
 								<a href="">Actualizar</a>
 							</td>
 						</tr>
-					<?php } ?>
+						<?php } ?>	
+					
 				</tbody>
 
 

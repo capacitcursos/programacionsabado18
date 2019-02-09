@@ -61,6 +61,16 @@ desired effect
 
   <!-- Main Header -->
   <?php include 'includes/header.php'; ?>
+
+  <?php 
+
+    $sql = "SELECT * from usuarios";
+    $query = $connection->prepare($sql);
+    $query->execute();   
+    $result= $query->fetchAll();
+    $total= count($result);
+
+  ?>
   
   <!-- Left side column. contains the logo and sidebar -->
   
@@ -71,8 +81,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Lista de Usuarios   <a href="usuarios-add.php" class="btn btn-success">+ Agregar</a>      
       </h1>
       
       <ol class="breadcrumb">
@@ -81,13 +90,50 @@ desired effect
       </ol>
 
     </section>
-
     <!-- Main content -->
     <section class="content container-fluid">
+       
+       <!-- LISTADO DE DATOS -->
+    <div class="col-sm-12">       
+       <div class="box box-default">            
+          
+          
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+          <table class="table table-bordered ">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>NOMBRE</th>
+                  <th>EMAIL</th>
+                  <th>AVATAR</th>
+                  <th>PASSWORD</th>
+                  <th>ACCIONES</th>
+                </tr>
+              </thead> 
+              <tbody>
+                <?php foreach ($result as $row) {  ?>                      
+                
+                <tr>
+                  <td><?php echo $row['id'] ; ?></td>
+                  <td><?php echo $row['nombre'] ; ?></td>
+                  <td><?php echo $row['email'] ; ?></td>
+                  <td><?php echo $row['avatar'] ; ?></td>
+                  <td><?php echo $row['password'] ; ?></td>
+                  <td>
+                    <a href="usuarios-delete.php?id=<?php echo $row['id'] ; ?>" class="btn btn-danger">Eliminar</a>
+                    <a href="usuarios-update.php?id=<?php echo $row['id'] ; ?>" class="btn btn-primary">Editar</a>
+                  </td>
+
+                </tr>
+
+                <?php } ?>
+              </tbody>         
+          </table>
+        </div> 
+      </div>             
+ 
+       <!-- / FIN LISTADO DE DATOS -->
+
 
     </section>
     <!-- /.content -->

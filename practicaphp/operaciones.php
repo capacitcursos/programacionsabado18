@@ -14,7 +14,7 @@
 	<main>
 		<a href="index.php">Volver</a>
 		<div class="col-sm-4">
-			<form method="get" action="">
+			<form method="post" action="">
 			<h3>Ingrese los valores</h3>
 			
 			<input type="text" name="valor1" class="form-control" placeholder="Ingrese el valor 1">
@@ -34,7 +34,8 @@
 		</div>
 
 		 <?php 
-		 var_dump($_POST);   
+		 
+		 //var_dump($_POST);   
 		 
 		 if (isset($_POST["valor1"]) && isset($_POST["valor2"])) {		  	
                 

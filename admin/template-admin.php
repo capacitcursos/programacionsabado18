@@ -84,10 +84,41 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
+       
+       <!-- LISTADO DE DATOS -->
+    <div class="col-sm-12">       
+       <div class="box box-default">   
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+          <table class="table table-bordered ">
+              <thead>
+                <tr>
+                  <th>COL</th>
+                  <th>COL</th>
+                  <th>COL</th>
+                  <th>COL</th>
+                  <th>COL</th>
+                </tr>
+              </thead> 
+              <tbody>
+                <tr>
+                  <td>--</td>
+                  <td>--</td>
+                  <td>--</td>
+                  <td>--</td>
+
+                  <td>
+                    <a href="" class="btn btn-danger">Eliminar</a>
+                    <a href="" class="btn btn-primary">Editar</a>
+                  </td>
+
+                </tr>
+              </tbody>         
+          </table>
+        </div> 
+      </div>             
+ 
+       <!-- / FIN LISTADO DE DATOS -->
+
 
     </section>
     <!-- /.content -->

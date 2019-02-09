@@ -1,7 +1,7 @@
 <?php
     #conexion a base de datos
     $user = 'root'; 
-    $password = ''; 
+    $password = 'paralelepipedo'; 
     $host = 'localhost';
     $dbname = 'programacionsabado18'; 
     $parametros = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");

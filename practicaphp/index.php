@@ -10,9 +10,11 @@
       <ul>
         <li><a href="variables.php">Variables</a></li>
         <li><a href="condicionales.php">Condicionales</a></li>
-        <li><a href="array.php">Array o matrices</a></li>
+        <li><a href="array.php">Array o matrices</a></li>      
         <li><a href="ciclos.php">Ciclos</a></li>
+        
         <li><a href="operaciones.php">Operaciones/Funciones</a></li>
+         <li><a href="lista-usuarios.php">Listado de Datos</a></li>
       </ul>
     
     </main>

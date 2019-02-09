@@ -14,6 +14,7 @@ operadores de comparacion
 */
 
 $edad= 17;
+
 if ($edad > 18) {
 	echo "ES MAYOR DE EDAD <br>";
 }
@@ -56,7 +57,6 @@ switch ($color) {
 			echo "No tengo color favorito";
 		break;
 }
-
 
 
 
