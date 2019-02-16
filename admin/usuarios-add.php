@@ -60,17 +60,52 @@ desired effect
 <div class="wrapper">
 
   <!-- Main Header -->
-  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/header.php'; ?>  
 
   <?php 
 
-    $sql = "SELECT * from usuarios";
-    $query = $connection->prepare($sql);
-    $query->execute();   
-    $result= $query->fetchAll();
-    $total= count($result);
+  
+   if (isset($_POST)) {
+      if ($_POST['Guardar'] == 'Guardar' && $_POST['nombre'] != '' && $_POST['email'] != '' && $_POST['password'] != '') {
+            //CAPTURAR LOS DATOS RECIBIDOS DEL FORMULARIO VIA POST Y GUARDARLOS EN VARIABLES
+            $nombre = $_POST['nombre'];
+            $password = md5($_POST['password']); //encriptar contraseña recibida
+            $activo = $_POST['activo'];
+            $avatar = $_POST['avatar'];
+            $email = $_POST['email'];
+            
+            //guardar consulta sql a ejecutar en una variable
+            $sql = 'INSERT INTO usuarios (nombre, email,  password, avatar, activo, fecha_add) VALUES (:nom, :email, :password, :avatar, :activo, NOW() )';
+            
+            //definir VARIABLE $data array() con los valores para la consulta SQL
+            $data = array(
+              'nombre' => $nombre,
+              'email' => $email,
+              'password' => $password,
+              'avatar' => $avatar,
+              'activo' => $activo
+             );
 
-  ?>
+            //preparar la consulta SQL
+            $query = $connection->prepare($sql);
+            
+            try {
+               
+               $query->execute($data); //Ejecutamos la consulta
+               //Guardamos un mensaje de exito en una variable
+               $mensaje = '<p class="alert alert-success">Registrado correctamente</p>';
+               //redireccionamos al listado de usuarios con JavaScript
+               echo '<script> window.location = "usuarios.php"; </script>';
+            
+            } catch (Exception $e) { //si hay algun error, guardamos en la variable $mensaje
+             
+              $mensaje = '<p class="alert alert-danger">'. $e .'</p>';
+
+            }
+      }
+    } 
+
+   ?>
   
   <!-- Left side column. contains the logo and sidebar -->
   
@@ -81,7 +116,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lista de Usuarios   <a href="usuarios-add.php" class="btn btn-success">+ Agregar</a>      
+        Registro de Usuarios <a href="usuarios.php" class="btn btn-success"> Lista de Usuarios</a>      
       </h1>
       
       <ol class="breadcrumb">
@@ -93,46 +128,43 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
        
-       <!-- LISTADO DE DATOS -->
+       <!-- FORMULARIO -->
     <div class="col-sm-12">       
-       <div class="panel">            
+       <div class="panel row"> 
+        <?php include 'includes/mensajes.php'; ?>
+        
+          <form action="" method="POST">
+            <div class="form-group col-md-6">
+              <label>Nombre de Usuario</label>
+              <input type="text" name="nombre" class="form-control" required> 
+
+              <label>E-mail</label>
+              <input type="email" name="email" class="form-control" required> 
+
+              
+              <label>Contraseña</label>
+              <input type="password" name="password" class="form-control" required> 
+
+
+              <label>Activo</label>
+              <select class="form-control" name="activo" required>
+                <option value="1"> SI</option>
+                <option value="0"> NO</option>
+              </select>
+
+              <label>Avatar</label>
+              <input type="text" name="avatar" class="form-control" required> 
+
+              <br>
+              <input type="submit" class="btn btn-success" name="Guardar" value="Guardar">
+
+            </div>
+          </form>       
           
-          
-
-          <table class="table table-bordered ">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>NOMBRE</th>
-                  <th>EMAIL</th>
-                  <th>AVATAR</th>
-                  <th>PASSWORD</th>
-                  <th>ACCIONES</th>
-                </tr>
-              </thead> 
-              <tbody>
-                <?php foreach ($result as $row) {  ?>                      
-                
-                <tr>
-                  <td><?php echo $row['id'] ; ?></td>
-                  <td><?php echo $row['nombre'] ; ?></td>
-                  <td><?php echo $row['email'] ; ?></td>
-                  <td><?php echo $row['avatar'] ; ?></td>
-                  <td><?php echo $row['password'] ; ?></td>
-                  <td>
-                    <a href="usuarios-delete.php?id=<?php echo $row['id'] ; ?>" class="btn btn-danger">Eliminar</a>
-                    <a href="usuarios-update.php?id=<?php echo $row['id'] ; ?>" class="btn btn-primary">Editar</a>
-                  </td>
-
-                </tr>
-
-                <?php } ?>
-              </tbody>         
-          </table>
         </div> 
       </div>             
  
-       <!-- / FIN LISTADO DE DATOS -->
+       <!-- / FIN FORMULARIO -->
 
 
     </section>
