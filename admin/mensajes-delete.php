@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['logueado'])) {
   header('Location: login.php');
 }
-
+require '../conexion/conexion.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,9 +62,9 @@ desired effect
   <!-- Main Header -->
   <?php include 'includes/header.php'; ?>
 
-  <?php 
-
-    $sql = "SELECT * from usuarios";
+  <?php
+   
+    $sql = "SELECT * from mensajes WHERE id = ". $_GET['id'];
     $query = $connection->prepare($sql);
     $query->execute();   
     $result= $query->fetchAll();
@@ -81,7 +81,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lista de Usuarios   <a href="usuarios-add.php" class="btn btn-success">+ Agregar</a>      
+        Lista de Mensajes   <a href="#" class="disabled btn btn-success">+ Agregar</a>      
       </h1>
       
       <ol class="breadcrumb">
@@ -95,40 +95,42 @@ desired effect
        
        <!-- LISTADO DE DATOS -->
     <div class="col-sm-12">       
-       <div class="box box-default">            
+       <div class="box box-default">   
+
+       <?php 
+       $total = 0; //Iniciamos variable total en cero
+
+         if( isset($_GET['id']) ){ //verificamos si hay una id  en la url
+                if ($_GET['id'] > 0 ) {    //verificamos si el id es mayor a cero               
+                    
+                    $sql = "SELECT * FROM mensajes WHERE id = " . $_GET['id'];
+                    $query = $connection->prepare($sql);
+                    $query->execute();
+                    $total = $query->rowCount(); 
+                }
+         }
+
+         if($total > 0 ) {
+            $sql = "DELETE FROM mensajes WHERE id = " . $_GET['id'];
+            $query = $connection->prepare($sql);
+           // $query->execute();
+
+            try {
+                $query->execute();                
+                echo '<script> window.location = "mensajes.php"; </script>';
+                //  $mensaje = '<p class="alert alert-success">Mensaje Eliminado con exito</p>';
+
+            } catch (PDOException $e) {
+                $mensaje = '<p class="alert alert-warning">Error al eliminar el registro '. $e->getMessage() .' </p>';       
+            }
+        }
+
+
+      ?>         
           
           
 
-          <table class="table table-bordered ">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>NOMBRE</th>
-                  <th>EMAIL</th>
-                  <th>AVATAR</th>
-                  <th>PASSWORD</th>
-                  <th>ACCIONES</th>
-                </tr>
-              </thead> 
-              <tbody>
-                <?php foreach ($result as $row) {  ?>                      
-                
-                <tr>
-                  <td><?php echo $row['id'] ; ?></td>
-                  <td><?php echo $row['nombre'] ; ?></td>
-                  <td><?php echo $row['email'] ; ?></td>
-                  <td><?php echo $row['avatar'] ; ?></td>
-                  <td><?php echo $row['password'] ; ?></td>
-                  <td>
-                    <a href="usuarios-delete.php?id=<?php echo $row['id'] ; ?>" class="btn btn-danger">Eliminar</a>
-                    <a href="usuarios-update.php?id=<?php echo $row['id'] ; ?>" class="btn btn-primary">Editar</a>
-                  </td>
-
-                </tr>
-
-                <?php } ?>
-              </tbody>         
-          </table>
+          
         </div> 
       </div>             
  

@@ -1,7 +1,9 @@
+<?php include 'funciones/funciones.php'; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mi primera página</title>	  
+	<title>Inicio - <?php echo parametros()['empresa']; ?></title>	  
   	<meta name="description" content="Cursos de programacion y diseño en Ciudad del este- Paraguay">
     <meta name="keywords" content="programacion, Cursos, diseño, ciudad del este">
     <?php include 'includes/head.php'; ?>    
@@ -69,6 +71,9 @@
         </div>
     </section>
 
+    <?php
+      $cursos = getCursos(4);
+    ?>
 
     <section class="contenido" id="cursos-destacados">
     	
@@ -77,67 +82,25 @@
     		   <h2>Cursos Destacados</h2>
     		   <hr>
     	  </div>	    	
-
+           
+        <?php foreach ($cursos as $curso) { ?>              
+          
     	   <div class="col-md-3">
-	    		<h3 class="text-center">Titulo del Curso</h3>
-
-	    		<img src="imagenes/course01.jpg" class="img-responsive">
-
-	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    		tempor incididunt ut labore et dolore magna aliqua.</p>
-
-	    		<a href="detalles.php" class="btn btn-info"> Detalles</a>
-
-	    		<span class="precio-curso">500.000Gs</span> <span class="mes-curso">/Mes</span>
+	    		<h3 class="text-center"><?php echo $curso['nombre'] ; ?></h3>
+	    		<img src="imagenes/<?php echo $curso['imagen'] ; ?>" class="img-responsive">
+	    		<p><?php echo $curso['descripcion_corta'] ; ?></p>
 	    		
+                <a href="detalles.php?id=<?php echo $curso['id'] ; ?>" class="btn btn-info"> Detalles</a>
+	    		<span class="precio-curso"><?php echo $curso['precio'] ; ?></span> <span class="mes-curso">/Mes</span>	    		
     	  </div>
 
-
-    	  <div class="col-md-3">
-	    		<h3 class="text-center">Titulo del Curso</h3>
-
-	    		<img src="imagenes/course01.jpg" class="img-responsive">
-
-	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    		tempor incididunt ut labore et dolore magna aliqua.</p>
-
-	    		<a href="detalles.php" class="btn btn-info"> Detalles</a>
-
-	    		<span class="precio-curso">500.000Gs</span> <span class="mes-curso">/Mes</span>
-	    		
-    	  </div>
-
-
-    	  <div class="col-md-3">
-	    		<h3 class="text-center">Titulo del Curso</h3>
-
-	    		<img src="imagenes/course01.jpg" class="img-responsive">
-
-	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    		tempor incididunt ut labore et dolore magna aliqua.</p>
-
-	    		<a href="detalles.php" class="btn btn-info"> Detalles</a>
-
-	    		<span class="precio-curso">500.000Gs</span> <span class="mes-curso">/Mes</span>
-	    		
-    	  </div>
-
-
-    	  <div class="col-md-3">
-	    		<h3 class="text-center">Titulo del Curso</h3>
-
-	    		<img src="imagenes/course01.jpg" class="img-responsive">
-
-	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    		tempor incididunt ut labore et dolore magna aliqua.</p>
-
-	    		<a href="detalles.php" class="btn btn-info"> Detalles</a>
-
-	    		<span class="precio-curso">500.000Gs</span> <span class="mes-curso">/Mes</span>
-	    		
-    	  </div>
+        <?php } ?>
 
     </div>
+    </section>
+
+    <section>
+        
     </section>
 
     </main>

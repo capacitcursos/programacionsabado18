@@ -1,7 +1,8 @@
+<?php include 'funciones/funciones.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mi primera página</title>    
+  <title>Cursos - <?php echo parametros()['empresa']; ?></title>    
     <meta name="description" content="Cursos de programacion y diseño en Ciudad del este- Paraguay">
     <meta name="keywords" content="programacion, Cursos, diseño, ciudad del este">
     <?php include 'includes/head.php'; ?>    

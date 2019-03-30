@@ -97,7 +97,7 @@ desired effect
     <div class="col-sm-12">       
        <div class="box box-default">            
           
-          
+          <?php include 'includes/mensajes.php'; ?>
 
           <table class="table table-bordered ">
               <thead>
@@ -124,8 +124,10 @@ desired effect
                   <td><?php echo $row['fecha_add'] ; ?></td>
 
                   <td>
-                    <a href="mensajes-delete.php?id=<?php echo $row['id'] ; ?>" class="btn btn-danger">Eliminar</a>
+                    <a onclick="delet(<?php echo $row['id']; ?>)" class="btn btn-danger">Eliminar</a>
                     <a href="mensajes-update.php?id=<?php echo $row['id'] ; ?>" class="disabled btn btn-primary">Editar</a>
+
+                    <a href="mensajes-delete.php?id=<?php echo $row['id'] ; ?>" class="btn btn-danger">Eliminar</a>
                   </td>
 
                 </tr>
@@ -163,4 +165,13 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+
+<!-- MOSTRAR MENSAJE DE ADVERTENCIA ANTES DE ELIMINAR -->
+<script language="JavaScript"> 
+  function delet(id) { 
+      if (confirm('¿Estas seguro de enviar este formulario?')){ 
+          location.href ="mensajes-delete.php?id="+id;
+      } 
+  } 
+</script> 
 </html>

@@ -21,6 +21,11 @@ do {
 	echo "El numero es ".$i."<br>";
 	$i++;	
 } while ($i <= 5);
+$x=1;
+do {
+	echo($x);
+	$x++;
+} while ($x <= 100);
 
 
 //CICLO FOR

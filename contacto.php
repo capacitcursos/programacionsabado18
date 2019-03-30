@@ -1,7 +1,8 @@
+<?php include 'funciones/funciones.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mi primera página</title>    
+  <title>Contacto - <?php echo parametros()['empresa']; ?></title>    
     <meta name="description" content="Cursos de programacion y diseño en Ciudad del este- Paraguay">
     <meta name="keywords" content="programacion, Cursos, diseño, ciudad del este">
     <?php include 'includes/head.php'; ?>    
@@ -32,7 +33,7 @@
               </div>
               <div class="media-body">
                 <h4 class="media-heading">Telefono</h4>
-                <span>0983112965</span>                
+                <span><?php echo parametros()['telefono']; ?></span>                
               </div>
           </div>
 
@@ -41,7 +42,7 @@
               </div>
               <div class="media-body">
                 <h4 class="media-heading">Email</h4>
-                <span>email@mipagina.com</span>                
+                <span><?php echo parametros()['email']; ?></span>                
               </div>
           </div>
 
@@ -50,7 +51,7 @@
               </div>
               <div class="media-body">
                 <h4 class="media-heading">Direccion</h4>
-                <span>Avda. San Blas. Km 3 1/2 Ciudad del Este</span>                
+                <span><?php echo parametros()['direccion']; ?></span>                
               </div>
           </div>
 
@@ -58,8 +59,14 @@
         </div>
 
         <div class="col-md-9">
+
+          <?php if(isset($_POST['enviar'])){ 
+              echo registrar_mensaje($_POST);
+            } ?>
+
+
            <h3>Formulario de Contacto</h3>
-           <form>
+           <form method="POST">
              <input type="text" name="nombre" class="form-control" placeholder="Nombre">
 
              <input type="text" name="apellido" class="form-control" placeholder="Apellido">

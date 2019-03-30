@@ -1,3 +1,12 @@
+<?php 
+if (isset($_GET['id'])) {
+   $id=$_GET['id'];
+ } 
+
+ $curso = getDetalleCurso($id);
+ var_dump( $curso);
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +24,10 @@
     <main>
       <section class="main-header">
       <div class="container">
-        <h1>Titulo del Curso</h1> 
-        <h2>descripcion corta del curso.</h2>     
+        <img src="imagenes/<?php echo $curso['imagen']; ?>">
+        <br>
+        <h1><?php echo $curso['nombre']; ?></h1> 
+        <h2><?php echo $curso['descripcion_corta']; ?></h2>     
       </div>      
       </section>
 
